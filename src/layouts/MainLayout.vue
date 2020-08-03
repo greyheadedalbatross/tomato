@@ -12,10 +12,14 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+<!--          Quasar App-->
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <div v-if="this.$q.cookies.has('user_token')">
+          {{ this.$q.cookies.get('user_name') }}
+        </div>
+        <div v-else>
+          <q-btn flat to="/login">登陆</q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -30,7 +34,7 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          番茄用户中心
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -47,50 +51,45 @@
 </template>
 
 <script>
+// import { Cookies } from 'quasar'
 import EssentialLink from 'components/EssentialLink.vue'
 
 const linksData = [
   {
-    title: 'Docs',
+    title: '项目查询',
     caption: 'quasar.dev',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: 'search'
   },
   {
-    title: 'Github',
+    title: '项目收藏',
     caption: 'github.com/quasarframework',
     icon: 'code',
     link: 'https://github.com/quasarframework'
   },
   {
-    title: 'Discord Chat Channel',
+    title: '获取短信码',
     caption: 'chat.quasar.dev',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    link: 'getSMS'
   },
   {
-    title: 'Forum',
+    title: '获取语音码',
     caption: 'forum.quasar.dev',
     icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    link: '#'
   },
   {
-    title: 'Twitter',
+    title: '消费明细',
     caption: '@quasarframework',
     icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    link: 'orderDetail'
   },
   {
-    title: 'Facebook',
+    title: '退款明细',
     caption: '@QuasarFramework',
     icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    link: '#'
   }
 ]
 
